@@ -12,6 +12,7 @@ public class updatePosts extends TestBase {
     public void UpdatePosts(){
         login = new loginPage(driver);
         login.login(username,password);
+        System.out.println("Hello from Mars");
     }
 
 }
