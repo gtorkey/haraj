@@ -22,7 +22,7 @@ public class TestBase {
     }
     @AfterMethod
     public void quitBrowser() throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(10000);
         driver.quit();
     }
 }
