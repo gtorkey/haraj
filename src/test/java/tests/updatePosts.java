@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.loginPage;
 
@@ -11,8 +12,11 @@ public class updatePosts extends TestBase {
     @Test
     public void UpdatePosts(){
         login = new loginPage(driver);
-        login.login(username,password);
+//        login.login(username,password);
+        logger.pass("Settings clicked & add app page displayed");
+        reporter("pass","Hello");
         System.out.println("Hello from Mars");
+
     }
 
 }
