@@ -15,6 +15,6 @@ public class updatePosts extends TestBase {
         logger.pass("Settings clicked & add app page displayed");
         reporter("pass","Hello");
         reporter("info","Hello");
-        System.out.println("Hello from Mars");
+        System.out.println("Hello from Mars 2");
     }
 }
