@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -41,19 +42,18 @@ public class TestBase {
         } else if (status.equalsIgnoreCase("Warning")) {
             logger.warning(stepDetail);
         }
-
     }
-
     @BeforeSuite
-    public void setUpSuite() {
+    public void setUpSuite() throws IOException {
         extent = new ExtentReports();
-        ExtentSparkReporter spark = new ExtentSparkReporter("target/extent-report.html");
+        ExtentSparkReporter spark = new ExtentSparkReporter("Reports/extent-report.html");
+        spark.loadJSONConfig(new File("Reports/extent-reports-config.json"));
+
         extent.attachReporter(spark);
     }
-
     @BeforeMethod
     public void setUp() {
-        reporter = new ExtentSparkReporter("target/extent-report.html");
+        reporter = new ExtentSparkReporter("Reports/extent-report.html");
         extent.attachReporter(reporter);
 
         logger = extent.createTest("Haraj");
@@ -70,27 +70,22 @@ public class TestBase {
     @AfterMethod
     public void tearDown(ITestResult result) throws InterruptedException, IOException {
         if (result.getStatus() == ITestResult.FAILURE) {
-            // Capture screenshot on test failure
             File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-            // Save the screenshot to a file
-            String screenshotPath = "target/screenshots/" + result.getName() + ".png";
+            String screenshotPath = "Reports/screenshots/" + result.getName() + ".png";
             FileUtils.copyFile(screenshotFile, new File(screenshotPath));
-
-            // Attach the screenshot to the report
             logger.fail("Test Failed. See screenshot below:");
             logger.fail(result.getThrowable());
             logger.addScreenCaptureFromPath(screenshotPath);
         }
-
         Thread.sleep(3000);
         driver.quit();
     }
 
 
     @AfterSuite
-    public void tearDownSuite() {
+    public void tearDownSuite() throws IOException {
         // Flush the ExtentReports instance to generate the report
         extent.flush();
+        Desktop.getDesktop().open(new File("Reports/extent-report.html"));
     }
-}
+    }
