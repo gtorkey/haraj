@@ -23,9 +23,10 @@ public class TestBase {
     protected static ExtentTest logger;
 
     static WebDriver driver;
-    public static void reporter(String status, String stepDetail) {
+    public static void reporter(String status, String stepDetail) throws InterruptedException {
 
         //ExtentTest logger = null;
+        Thread.sleep(1000);
         String base64Screenshot;
         try {
             base64Screenshot = HelperClass.capture(driver);
@@ -63,7 +64,7 @@ public class TestBase {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://haraj.com.sa/");
-        logger.pass("User logged in, Home page loaded successfully");
+        logger.pass("Home page loaded successfully");
 
     }
 

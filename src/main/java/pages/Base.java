@@ -5,10 +5,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
+
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 public class Base {
     protected static WebDriver driver;
+    SoftAssert soft = new SoftAssert();
+
     private final long timeoutInSeconds = 20;
     WebDriverWait webDriverWait;
     public Base(WebDriver driver) {
