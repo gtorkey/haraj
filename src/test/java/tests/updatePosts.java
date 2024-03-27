@@ -25,6 +25,8 @@ public class updatePosts extends TestBase {
         for (int i = 1; i < login.postNumbers(); i++) {
             login.clickOnSinglePost(i);
             login.updateSinglePost();
+            driver.navigate().back();
+            System.out.println("number is"+i);
         }
         System.out.println("Hello from Mars 2");
         logger.pass("Successfully logged in");
