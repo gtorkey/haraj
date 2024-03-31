@@ -17,7 +17,9 @@ public class loginPage extends Base {
     private final By submitLoginLocator = By.cssSelector("button[data-testid=\"auth_submit_login\"]");
     public final By profileNameLocator = By.xpath("//div[contains(text(), '" + username + "')]");
     public final By accountProfileLocator = By.xpath("//a[@data-testid=\"store\"]");
+    public final By languageLocator = By.cssSelector("span[class=\"my-1 flex items-center gap-2 rounded-md border border-secondary-input-gray px-2 py-1 group-hover:border-white\"]");
     public final By updateButton = By.xpath("//button[@data-testid=\"update-button\"]");
+    public final By lastUpdateTimeLoc = By.cssSelector("div[class=\"flex flex-1 items-center gap-2\"] span");
 
 
     public loginPage(WebDriver driver) {
@@ -38,7 +40,9 @@ public class loginPage extends Base {
     public void goToProfile(){
         click(waitUntilElementToBeClickable(profileNameLocator));
         click(waitUntilElementToBeClickable(accountProfileLocator));
-
+    }public void changeLang(){
+        click(waitUntilElementToBeClickable(profileNameLocator));
+        click(waitUntilElementToBeClickable(languageLocator));
     }
     public int postNumbers(){
         return driver.findElements(By.xpath("//div[@id=\"postsList\"]//div[@data-testid=\"post-item\"]")).size();
@@ -49,6 +53,10 @@ public class loginPage extends Base {
     }
     public void updateSinglePost(){
         click(updateButton);
+
+    }
+    public String getLastUpdateTime(){
+       return waitUntilElementToBevisible(lastUpdateTimeLoc).getText();
     }
 
 
