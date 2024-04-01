@@ -19,11 +19,17 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
 public class TestBase {
+
+
+    public static boolean executeBeforeMethod = true;
     protected static ExtentReports extent;
     protected static ExtentSparkReporter reporter;
     protected static ExtentTest logger;
 
     static WebDriver driver;
+
+
+
     public static void reporter(String status, String stepDetail) throws InterruptedException {
 
         //ExtentTest logger = null;
@@ -64,9 +70,10 @@ public class TestBase {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("https://haraj.com.sa/");
-        logger.pass("Home page loaded successfully");
-
+        if (executeBeforeMethod) {
+            driver.get("https://haraj.com.sa/");
+            logger.pass("Home page loaded successfully");
+        }
     }
 
     @AfterMethod
