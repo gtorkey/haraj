@@ -33,12 +33,12 @@ public class updatePosts extends TestBase {
         for (int i = 1; i <= login.postNumbers(); i++) {
             login.clickOnSinglePost(i);
             login.updateSinglePost();
-            if (wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class=\"ct-row\"][1]/div[2]//div[@class=\"ct-toast  ct-toast-error\"]//div[@class=\"ct-text-group\"]/div ")))).getText().trim().contains("لم يتم التحديث"))
-            {
+
+            try {
+                wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class=\"ct-row\"][1]/div[2]//div[@class=\"ct-toast  ct-toast-error\"]//div[@class=\"ct-text-group\"]/div ")))).isDisplayed();
                 reporter("fail","Post number "+i+" is not updated "+"Last update time is : "+login.getLastUpdateTime());
                 soft.fail("Post number "+i+" is not updated ");
-            }
-            else
+            }catch (Exception e)
             {
                 reporter("pass","Post number "+i+" is updated");
             }

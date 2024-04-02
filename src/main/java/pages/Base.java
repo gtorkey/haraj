@@ -34,7 +34,7 @@ public class Base {
         return webElement;
     }
     protected WebElement waitUntilElementToBevisible(By locator) {
-        return new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return new WebDriverWait(driver, Duration.ofSeconds(4)).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
     protected void waitUntilElementToBeClickable(WebElement webElement) {
         webDriverWait.until(ExpectedConditions.elementToBeClickable(webElement));
