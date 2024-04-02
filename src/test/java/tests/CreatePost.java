@@ -17,13 +17,18 @@ public class CreatePost extends TestBase {
     loginPage login;
     AddNewPostPage post;
     SoftAssert soft = new SoftAssert();
+    WebDriverWait wait;
     String username = "hambaka";
     String password = "847896";
-    WebDriverWait wait;
-    int postNumber = 4;
+    int postNumber = 3;
     int provinceNumber = 2;
     int cityNumber = 1;
     int neighborhoodIndex = 5;
+    boolean showPhoneNumber = true ;
+    String phoneNumber = "123456789";
+    boolean showPrice = false ;
+    String price = "2000";
+    String details = "This is a test post for the automation project 2024 by Hambaka team";
 
     @Test
     public void createPost() throws InterruptedException {
@@ -98,15 +103,34 @@ public class CreatePost extends TestBase {
                 return;
         }
 
-
-
-
-
-
         if (post.uploadImage()) {
             reporter("pass", "Successfully click on upload image button and redirected to details page");
         } else {
             reporter("fail", "Failed to upload image");
         }
+        reporter("info", "Your address: "+post.printSelectedAddress());
+
+        post.setPostTitle("Car hunda 2020 model");
+        Thread.sleep(1000);
+        reporter("pass", "The post title entered Successfully");
+
+        if (showPhoneNumber) {
+            post.setPhoneNumber(phoneNumber);
+            reporter("pass", "The phone number is shown and entered Successfully");
+        } else {
+            post.hidePhoneNumber();
+            reporter("pass", "The phone number is hidden Successfully");
+        }
+
+        if (showPrice) {
+            post.setPrice(price);
+            reporter("pass", "The price is shown and entered Successfully");
+        } else {
+            reporter("info", "There is no price!!");
+        }
+
+        post.setDetails(details);
+        reporter("pass", "The details entered Successfully");
+
     }
 }

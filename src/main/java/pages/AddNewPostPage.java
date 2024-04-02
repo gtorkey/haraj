@@ -23,6 +23,16 @@ public class AddNewPostPage extends Base {
     private static final By confirmMapLocator= By.cssSelector("button[data-testid=\"mapbox-location-confirm\"]");
     private static final By uploadImageLocator= By.cssSelector("button[data-testid=\"upload-box-others\"]");
     private static final By uploadBtnLocator= By.cssSelector("button[data-testid=\"step-four-resume\"]");
+    private static final By selectedAddressLocator= By.cssSelector("div[class=\"flex min-h-[1.5em] w-full flex-wrap items-center justify-between text-text-primary\"] span");
+    private static final By postTitleInputLocator= By.cssSelector("input[data-testid=\"new-post-title\"]");
+    private static final By phoneNumberInputLocator= By.cssSelector("input[data-testid=\"step-five-mobile-input\"]");
+    private static final By showPhoneNumberLocator= By.xpath("//div[@class=\"flex items-center\"][1]");
+    private static final By showPriceLocator= By.xpath("//span[@dir=\"ltr\"]//div");
+    private static final By priceInputLocator= By.name("price");
+    private static final By detailsInputLocator= By.cssSelector("textarea[data-testid=\"add-post-bodyText\"]");
+
+
+
 
 
 
@@ -124,6 +134,30 @@ public class AddNewPostPage extends Base {
             return false;
         }
     }
+    public String printSelectedAddress() {
+        return waitUntilElementToBevisible(selectedAddressLocator).getText();
+    }
+    public void setPostTitle(String title) {
+        setTextElement(waitUntilElementToBevisible(postTitleInputLocator), title);
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+
+            setTextElement(waitUntilElementToBevisible(phoneNumberInputLocator), phoneNumber);
+
+    }
+    public void hidePhoneNumber() {
+        click(waitUntilElementToBevisible(showPhoneNumberLocator));
+    }
+
+    public void setPrice(String price) {
+            click(waitUntilElementToBevisible(showPriceLocator));
+            setTextElement(waitUntilElementToBevisible(priceInputLocator), price);
+    }
+    public void setDetails(String details) {
+        setTextElement(waitUntilElementToBevisible(detailsInputLocator), details);
+    }
+
 
 
 
