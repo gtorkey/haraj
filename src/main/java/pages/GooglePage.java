@@ -12,7 +12,8 @@ import java.util.List;
 public class GooglePage extends Base{
 
     private static final By searchBoxLocator = By.id("APjFqb");
-    private static final By searchResultLocator = By.cssSelector("h3[class=\"LC20lb MBeuO DKV0Md\"]");
+    private static final By searchResultLocator = By.xpath("//*[@class=\"oIk2Cb\"]//a");
+    private static final By searchKeywordLocator = By.xpath("//ul[@role=\"listbox\"]/li");
 
     public GooglePage(WebDriver driver) {
         super(driver);
@@ -28,7 +29,7 @@ public class GooglePage extends Base{
     public List<String> searchResult() {
         List<WebElement> searchResults = driver.findElements(searchResultLocator);
         List<String> searchResultText = new ArrayList<>();
-        for (int i = 0; i <10 ; i++) {
+        for (int i = 0; i <searchResults.size() ; i++) {
             String text = searchResults.get(i).getText();
             if (text.isEmpty())
                 text = searchResults.get(i).getAttribute("textContent");
@@ -36,5 +37,21 @@ public class GooglePage extends Base{
             System.out.println(text);
         }
         return searchResultText;
+    }
+    public List<String> searchKeyword(String keyword) {
+        setTextElement(waitUntilElementToBevisible(searchBoxLocator), keyword);
+        List<WebElement> searchResults = driver.findElements(searchKeywordLocator);
+        List<String> searchKeywordText = new ArrayList<>();
+        for (int i = 0; i <searchResults.size() ; i++) {
+            String text = searchResults.get(i).getText();
+            if (text.isEmpty())
+                text = searchResults.get(i).getAttribute("textContent");
+            searchKeywordText.add(text);
+            System.out.println(text);
+        }
+        waitUntilElementToBeClickable(searchBoxLocator).submit();
+        String pageTitle= driver.getTitle();
+        assert pageTitle.contains(keyword);
+        return searchKeywordText;
     }
 }

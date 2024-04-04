@@ -18,18 +18,22 @@ public class GoogleSearch extends TestBase {
         super.setUp();
     }
 
-    String query = "selenium";
+    String query = "اشتراك كانفا برو";
 
     @Test
-    public void testGoogleSearch() throws InterruptedException {
+    public void testGoogleSearchKeyword() throws InterruptedException {
         setUp();
         driver.get("https://www.google.com");
         googlePage = new GooglePage(driver);
-        googlePage.search(query);
         reporter("pass","Google search for " + query + " is successful");
+        List<String> keywords = googlePage.searchKeyword(query);
+        for (String keyword : keywords) {
+            reporter("info",keyword);
+        }
         List<String> results = googlePage.searchResult();
         for (String result : results) {
             reporter("info",result);
         }
+
     }
 }
