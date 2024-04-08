@@ -30,9 +30,10 @@ public class AddNewPostPage extends Base {
     private static final By showPriceLocator= By.xpath("//span[@dir=\"ltr\"]//div");
     private static final By priceInputLocator= By.name("price");
     private static final By detailsInputLocator= By.cssSelector("textarea[data-testid=\"add-post-bodyText\"]");
-
-
-
+    private static final By uploadFrontCarImageLocator= By.cssSelector("button[data-testid=\"upload-box-car-front\"]");
+    private static final By uploadSideCarImageLocator= By.cssSelector("button[data-testid=\"upload-box-car-side\"]");
+    private static final By uploadInsideCarImageLocator= By.cssSelector("button[data-testid=\"upload-box-car-inside\"]");
+    private static final By createPostBtnLocator= By.cssSelector("button[data-testid=\"post-submit\"]");
 
 
 
@@ -121,18 +122,38 @@ public class AddNewPostPage extends Base {
     }
 
     // Method to upload an image
-    public boolean uploadImage() throws InterruptedException {
-        try {
+    public boolean uploadImage(int postNumber,String imagePath) throws InterruptedException {
+        if (postNumber!=1){
+            try {
+                soft.assertTrue(driver.findElement(By.cssSelector("h3[class=\"text-lg md:text-xl font-bold\"]")).getText().contains("Upload images"));
+                WebElement uploadInput = waitUntilElementToBeClickable(uploadImageLocator);
+                uploadInput.sendKeys(imagePath);
+                click(waitUntilElementToBeClickable(uploadBtnLocator));
+                return true;
+            } catch (Exception e) {
+                System.out.println("Upload image locator not found.");
+                return false;
+            }
+        }/*else {
+            try {
             soft.assertTrue(driver.findElement(By.cssSelector("h3[class=\"text-lg md:text-xl font-bold\"]")).getText().contains("Upload images"));
-            String path = "C:\\Users\\qaahm\\Videos\\Captures\\test.png";
-            WebElement uploadInput = waitUntilElementToBeClickable(uploadImageLocator);
-            uploadInput.sendKeys(path);
+            String uploadFront = "C:\\Users\\qaahm\\Videos\\Captures\\test.png";
+            String SideImagePath = "C:\\Users\\qaahm\\Videos\\Captures\\test.png";
+            String InsideImagePath = "C:\\Users\\qaahm\\Videos\\Captures\\test.png";
+            WebElement uploadFrontImage = waitUntilElementToBeClickable(uploadFrontCarImageLocator);
+            uploadFrontImage.sendKeys(uploadFront);
+            WebElement uploadSideImage = waitUntilElementToBeClickable(uploadSideCarImageLocator);
+            uploadSideImage.sendKeys(SideImagePath);
+            WebElement uploadInsideImage = waitUntilElementToBeClickable(uploadInsideCarImageLocator);
+            uploadInsideImage.sendKeys(InsideImagePath);
             click(waitUntilElementToBeClickable(uploadBtnLocator));
             return true;
         } catch (Exception e) {
             System.out.println("Upload image locator not found.");
             return false;
-        }
+            }
+        }*/
+        return false;
     }
     public String printSelectedAddress() {
         return waitUntilElementToBevisible(selectedAddressLocator).getText();
@@ -157,6 +178,10 @@ public class AddNewPostPage extends Base {
     public void setDetails(String details) {
         setTextElement(waitUntilElementToBevisible(detailsInputLocator), details);
     }
+    public void createPost() {
+        click(waitUntilElementToBeClickable(createPostBtnLocator));
+    }
+
 
 
 

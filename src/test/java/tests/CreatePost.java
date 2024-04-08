@@ -20,13 +20,14 @@ public class CreatePost extends TestBase {
     WebDriverWait wait;
     String username = "hambaka";
     String password = "847896";
-    int postNumber = 3;
+    int postNumber = 7;
+    String imagePath = "C:\\Users\\qaahm\\Videos\\Captures\\test.png";
     int provinceNumber = 2;
     int cityNumber = 1;
     int neighborhoodIndex = 5;
     boolean showPhoneNumber = true ;
     String phoneNumber = "123456789";
-    boolean showPrice = false ;
+    boolean showPrice = true;
     String price = "2000";
     String details = "This is a test post for the automation project 2024 by Hambaka team";
 
@@ -42,10 +43,11 @@ public class CreatePost extends TestBase {
         reporter("pass", "Successfully change Language");
         post.goToAddPostPage();
         reporter("pass", "Successfully go to add post page");
+
         List<WebElement> posts = driver.findElements(By.cssSelector("div[class=\"flex-grow overflow-hidden\"]"));
         if (postNumber <= posts.size()) {
             String postText = posts.get(postNumber-1).getText();
-            if (post.clickOnPost(postNumber)) {
+            if (post.clickOnPost(postNumber-1)) {
                 reporter("pass", "Successfully click on post number " + postNumber);
                 reporter("info", "You clicked on: " + postText);
             }
@@ -75,6 +77,7 @@ public class CreatePost extends TestBase {
                 reporter("fail", "Failed to select province number " + provinceNumber + " and the total number of provinces is " + provinceCountSize);
                 return;
         }
+
         List<WebElement> cities = driver.findElements(By.cssSelector("div[class=\"flex-grow overflow-hidden\"] a"));
             if (cityNumber>=0 && cityNumber <= cities.size()) {
                 String cityName = cities.get(cityNumber-1).getText();
@@ -103,11 +106,12 @@ public class CreatePost extends TestBase {
                 return;
         }
 
-        if (post.uploadImage()) {
+        if (post.uploadImage(postNumber,imagePath)) {
             reporter("pass", "Successfully click on upload image button and redirected to details page");
         } else {
             reporter("fail", "Failed to upload image");
         }
+
         reporter("info", "Your address: "+post.printSelectedAddress());
 
         post.setPostTitle("Car hunda 2020 model");
@@ -131,6 +135,9 @@ public class CreatePost extends TestBase {
 
         post.setDetails(details);
         reporter("pass", "The details entered Successfully");
+
+        post.createPost();
+        reporter("pass", "The post created Successfully");
 
     }
 }
