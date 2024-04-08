@@ -39,10 +39,10 @@ public class Base {
     protected void waitUntilElementToBeClickable(WebElement webElement) {
         webDriverWait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
-    protected WebElement waitUntilElementToBeClickable(By locator) {
+    protected static WebElement waitUntilElementToBeClickable(By locator) {
         return new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(locator));
     }
-    protected void click(WebElement webElement) {
+    protected static void click(WebElement webElement) {
         for (int i = 0; i < 10; i++) {
             try {
                 webElement.click();

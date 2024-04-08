@@ -15,6 +15,8 @@ public class copyPost extends Base{
     private static final By contactBtnLocator = By.cssSelector("button[data-testid=\"post-contact\"]");
     private static final By mobNumberLocator = By.cssSelector("a[data-testid=\"contact_mobile\"]");
     private static final By exitLocator = By.cssSelector("svg[data-icon=\"times\"]");
+    private static final By logoLocator = By.cssSelector("img[data-testid=\"logo-image\"]");
+    private static final By navigateBackLocator = By.cssSelector("svg[data-icon=\"arrow-right\"]");
 //    private static final By mobNumberLocator = By.cssSelector("a[data-testid=\"contact_mobile\"] div:nth-child(2)]");
 
 
@@ -23,9 +25,9 @@ public class copyPost extends Base{
         PageFactory.initElements(driver, this);
     }
 
-    public double getPostPrice() {
+    public int getPostPrice() {
         String price = driver.findElement(postPriceLocator).getText();
-        return Double.parseDouble(price.replaceAll("[^0-9.]", ""));
+        return Integer.parseInt(price.replaceAll("[^0-9.]", ""));
     }
     public String getTitlePost() {
         click(waitUntilElementToBeClickable(postLinkLocator));
@@ -55,6 +57,14 @@ public class copyPost extends Base{
         String number =  waitUntilElementToBevisible(mobNumberLocator).getText();
         click(waitUntilElementToBeClickable(exitLocator));
         return number;
+    }
+
+    public void goToHomePage() {
+        click(waitUntilElementToBeClickable(logoLocator));
+    }
+
+    public static void navigateBack() {
+        click(waitUntilElementToBeClickable(navigateBackLocator));
     }
 
 

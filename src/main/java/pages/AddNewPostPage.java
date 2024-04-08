@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static java.lang.String.valueOf;
+
 public class AddNewPostPage extends Base {
 
     private static final By addNewPostLocator = By.cssSelector("button[data-testid=\"add-post-button\"]");
@@ -174,6 +176,10 @@ public class AddNewPostPage extends Base {
     public void setPrice(String price) {
             click(waitUntilElementToBevisible(showPriceLocator));
             setTextElement(waitUntilElementToBevisible(priceInputLocator), price);
+    }
+    public void setPrice(int price) {
+        click(waitUntilElementToBevisible(showPriceLocator));
+        setTextElement(waitUntilElementToBevisible(priceInputLocator), valueOf(price));
     }
     public void setDetails(String details) {
         setTextElement(waitUntilElementToBevisible(detailsInputLocator), details);
