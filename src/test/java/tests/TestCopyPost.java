@@ -137,6 +137,7 @@ public class TestCopyPost extends TestBase {
     private boolean selectCityBasedOnAddress(AddNewPostPage post, String addressKeyword) throws InterruptedException {
         Map<String, String> addressMapping = new HashMap<>();
         addressMapping.put("Jeddah", "Jdh");
+        addressMapping.put("Makkah", "Mkh");
 
         List<WebElement> provinces = driver.findElements(By.cssSelector("div[class=\"flex-grow overflow-hidden\"] a"));
         for (int i = 0; i < provinces.size(); i++) {
