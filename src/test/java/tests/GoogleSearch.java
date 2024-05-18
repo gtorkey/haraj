@@ -2,6 +2,8 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.GooglePage;
 
@@ -18,8 +20,12 @@ public class GoogleSearch extends TestBase {
         super.setUp();
     }
 
-    String query = "اشتراك كانفا برو";
-
+    String query;
+    @BeforeClass
+    @Parameters({"query"})
+    public void setQuery(String query) {
+        this.query = query;
+    }
     @Test
     public void testGoogleSearchKeyword() throws InterruptedException {
         setUp();

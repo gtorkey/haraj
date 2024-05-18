@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="login test cases">
+    <test name="testngTest">
+        <parameter name="query" value="اشتراك كانفا برو"/>
+        <classes>
+            <class name="tests.GoogleSearch">
+                <methods>
+                    <include name="testGoogleSearchKeyword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
