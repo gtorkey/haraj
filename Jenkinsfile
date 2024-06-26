@@ -2,7 +2,7 @@ pipeline {
     try{
     notifyBuild('STARTED')
    stage('Preparation') {
-      git 'YOUR GITHUB REPOSOIRTY URL'
+      git 'https://github.com/gtorkey/haraj.git'
 
       mvnHome = tool 'MAVEN_HOME'
    }
