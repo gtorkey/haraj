@@ -62,31 +62,31 @@ public class TestBase {
     // }
     @BeforeMethod
     public void setUp() {
-        reporter = new ExtentSparkReporter("Reports/extent-report.html");
-        extent.attachReporter(reporter);
+        // reporter = new ExtentSparkReporter("Reports/extent-report.html");
+        // extent.attachReporter(reporter);
 
-        logger = extent.createTest("Haraj");
+        // logger = extent.createTest("Haraj");
 
         // Initialize the WebDriver instance
         WebDriverManager.edgedriver().clearDriverCache().setup();
         driver = new EdgeDriver();
         driver.manage().window().maximize();
-        if (executeBeforeMethod) {
-            driver.get("https://haraj.com.sa/");
-            logger.pass("Home page loaded successfully");
-        }
+        // if (executeBeforeMethod) {
+        //     driver.get("https://haraj.com.sa/");
+        //     logger.pass("Home page loaded successfully");
+        // }
     }
 
     @AfterMethod
     public void tearDown(ITestResult result) throws InterruptedException, IOException {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            String screenshotPath = "Reports/screenshots/" + result.getName() + ".png";
-            FileUtils.copyFile(screenshotFile, new File(screenshotPath));
-            logger.fail("Test Failed. See screenshot below:");
-            logger.fail(result.getThrowable());
-            logger.addScreenCaptureFromPath(screenshotPath);
-        }
+        // if (result.getStatus() == ITestResult.FAILURE) {
+        //     File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        //     String screenshotPath = "Reports/screenshots/" + result.getName() + ".png";
+        //     FileUtils.copyFile(screenshotFile, new File(screenshotPath));
+        //     logger.fail("Test Failed. See screenshot below:");
+        //     logger.fail(result.getThrowable());
+        //     logger.addScreenCaptureFromPath(screenshotPath);
+        // }
         Thread.sleep(3000);
         driver.quit();
     }
