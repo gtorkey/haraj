@@ -68,8 +68,8 @@ public class TestBase {
         logger = extent.createTest("Haraj");
 
         // Initialize the WebDriver instance
-        WebDriverManager.chromedriver().clearDriverCache().setup();
-        driver = new ChromeDriver();
+        WebDriverManager.edgedriver().clearDriverCache().setup();
+        driver = new EdgeDriver();
         driver.manage().window().maximize();
         if (executeBeforeMethod) {
             driver.get("https://haraj.com.sa/");
