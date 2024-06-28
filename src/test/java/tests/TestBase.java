@@ -67,7 +67,7 @@ public class TestBase {
 
         logger = extent.createTest("Haraj");
 
-        Initialize the WebDriver instance
+        // Initialize the WebDriver instance
         WebDriverManager.chromedriver().clearDriverCache().setup();
         driver = new ChromeDriver();
 
