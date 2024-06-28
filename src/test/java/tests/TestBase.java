@@ -52,14 +52,14 @@ public class TestBase {
             logger.warning(stepDetail);
         }
     }
-    @BeforeSuite
-    public void setUpSuite() throws IOException {
-        extent = new ExtentReports();
-        ExtentSparkReporter spark = new ExtentSparkReporter("Reports/extent-report.html");
-        spark.loadJSONConfig(new File("Reports/extent-reports-config.json"));
+    // @BeforeSuite
+    // public void setUpSuite() throws IOException {
+    //     extent = new ExtentReports();
+    //     ExtentSparkReporter spark = new ExtentSparkReporter("Reports/extent-report.html");
+    //     spark.loadJSONConfig(new File("Reports/extent-reports-config.json"));
 
-        extent.attachReporter(spark);
-    }
+    //     extent.attachReporter(spark);
+    // }
     @BeforeMethod
     public void setUp() {
         reporter = new ExtentSparkReporter("Reports/extent-report.html");
